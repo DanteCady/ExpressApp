@@ -28,14 +28,26 @@ connection.query('DESCRIBE employees', (err, results) => {
     console.error('Error describing table:', err);
     return;
   }
-  console.log('Table description:', results);
+  // console.log('Table description:', results);
 });
+
+// Create user in database
+connection.query(
+  'INSERT INTO employees (firstName, lastName, phone, salary, department, hireDate) VALUES (?, ?, ?, ?, ?, ?)',
+  ['Dante', 'Cady', '401-446-3342', '132,000', 'Engineering', '2023-05-01', ], (err, results) => {
+  if (err) {
+    console.error('Error creating user:', err);
+    return;
+  }
+  console.log('User created successfully!');
+});
+
 
 const express = require('express')
 const app = express()
 
 app.get('/', function (req, res) {
-  res.send('idex.html')  // change this to index.html
+  res.send('index.html')  // change this to index.html
 })
 
 app.listen(PORT, () => {
