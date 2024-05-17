@@ -3,11 +3,7 @@ const express = require('express')
 const app = express()
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
-
-// dotenv
-// const doxname = process.env.SECRET_USER
 const PORT = process.env.PORT
-// console.log(doxname);
 
 const connection = mysql.createConnection({
     host: process.env.DB_HOST,
