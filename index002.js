@@ -43,6 +43,7 @@ app.post('/addemployee', (req, res) => {
         } else {
             console.log('Employee added successfully');
             res.send('Employee added successfully');
+            res.redirect('/'); // Redirect to main page after adding employee
         }
     });
 });
