@@ -43,7 +43,6 @@ app.post('/addemployee', (req, res) => {
         } else {
             console.log('Employee added successfully');
             res.send('Employee added successfully');
-
         }
     });
 });
@@ -55,11 +54,14 @@ app.post ('/login', (req, res) => {
     // Database query
     connection.query (query, email, (err, res) => {
       if (err) {
+        console.error('Database Error!')
         return res.status(500).send({message: 'Databasee Error.'})
       }
       if (res.length === 0) {
+        console.error('User Not Found!')
         return res.status(401).send({message: "User Not Found."})
       } else {
+        console.log('Successful Login!')
         return res.status(200).send({ message: `User: ${email} logged In Successfully.`})
       }
     }
