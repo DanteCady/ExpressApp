@@ -48,6 +48,24 @@ app.post('/addemployee', (req, res) => {
     });
 });
 
+app.post ('/login', (req, res) => {
+    const {email, password} = req.body
+    const query = 'SELECT * FROM users WHERE email = ?' 
+    
+    // Database query
+    connection.query (query, email, (err, res) => {
+      if (err) {
+        return res.status(500).send({message: 'Databasee Error.'})
+      }
+      if (res.length === 0) {
+        return res.status(401).send({message: "User Not Found."})
+      } else {
+        return res.status(200).send({ message: `User: ${email} logged In Successfully.`})
+      }
+    }
+  )
+})
+
 
 app.listen(PORT, () => {
   console.log(`Node.js server running at http://localhost:${PORT}`);
