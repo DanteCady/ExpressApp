@@ -47,29 +47,38 @@ app.post('/addemployee', (req, res) => {
     });
 });
 
-app.post ('/login', (req, res) => {
-    const {email, password} = req.body
-    const query = 'SELECT * FROM users WHERE email = ?' 
-    
-    // Database query
-    connection.query (query, email, (err, res) => {
-      if (err) {
-        console.error('Database Error!')
-        return res.status(500).send({message: 'Databasee Error.'})
-      }
-      if (res.length === 0) {
-        console.error('User Not Found!')
-        return res.status(401).send({message: "User Not Found."})
-      } else {
-        console.log('Successful Login!')
-        return res.status(200).send({ message: `User: ${email} logged In Successfully.`})
-      }
+
+
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
+  const query = 'SELECT * FROM users WHERE emailAddress = ?';
+  
+  // Database query
+  connection.query(query, [email], (err, results) => {
+    if (err) {
+      console.error('Database Error!', err);
+      return res.status(500).send({ message: 'Database Error.' });
     }
-  )
-})
+    
+    if (results.length === 0) {
+      console.error('User Not Found!');
+      return res.status(401).send({ message: "User Not Found." });
+    }
+    
+    const loginDetails = results[0];
+    
+    if (email === loginDetails.emailAddress && password === loginDetails.password) {
+      console.log('Successful Login!');
+      return res.status(200).send({ message: `User: ${email} logged In Successfully.` });
+    } else {
+      console.error('Incorrect Password!');
+      return res.status(401).send({ message: 'Incorrect Password.' });
+    }
+  });
+});
 
 
 app.listen(PORT, () => {
   console.log(`Node.js server running at http://localhost:${PORT}`);
-  console.log(`add user to database at http://localhost:${PORT}/addemployee`);
+  // console.log(`add user to database at http://localhost:${PORT}/addemployee`);
 })
