@@ -48,9 +48,7 @@ app.post('/addemployee', (req, res) => {
     });
 });
 
-app.post('/login' => {
 
-}
 // app.get('/', function (req, res) {
 //   // res.send('Hello Geeks!')  
 //   // instead of hello geeks, res.send index.html
