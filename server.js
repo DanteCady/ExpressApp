@@ -43,7 +43,7 @@ app.post('/addemployee', (req, res) => {
         if (err) {
             console.error('Error inserting employee:', err);
             res.status(500).send('Error inserting employee');
-        } else {
+        } else { 
             console.log('Employee added successfully');
             res.send('Employee added successfully');
         }
