@@ -1,9 +1,11 @@
 require('dotenv').config()
 const express = require('express')
+const cors = require('cors')
 const app = express()
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT
+
 
 const connection = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -21,8 +23,9 @@ connection.connect(err => {
 
 
 
-
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.post('/addemployee', (req, res) => {
     const { fname, lname, dept, jobTitle, hireDate, endDate, salary } = req.body;
 
