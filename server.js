@@ -74,7 +74,6 @@ app.post('/login', (req, res, next) => {
     if (email == loginDetails.emailAddress && password == loginDetails.password) {
       console.log('Successful Login!');
       return res.status(200).send({ message: `User: ${email} logged In Successfully.`, log: `User: ${email} logged In Successfully.` });
-      res.redirect('/employees');
     } else {
       console.error('Incorrect Password or Username');
       return res.status(401).send({ message: 'Incorrect Password or Username.', log: 'Incorrect Password or Username.'});
