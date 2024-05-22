@@ -26,6 +26,7 @@ connection.connect(err => {
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 app.post('/addemployee', (req, res) => {
     const { fname, lname, dept, jobTitle, hireDate, endDate, salary } = req.body;
 
@@ -52,7 +53,7 @@ app.post('/addemployee', (req, res) => {
 
 
 
-app.post('/login', (req, res) => {
+app.post('/login', (req, res, next) => {
   const { email, password } = req.body;
   const query = 'SELECT * FROM users WHERE emailAddress = ?';
   
@@ -70,16 +71,27 @@ app.post('/login', (req, res) => {
     
     const loginDetails = results[0];
     
-    if (email === loginDetails.emailAddress && password === loginDetails.password) {
+    if (email == loginDetails.emailAddress && password == loginDetails.password) {
       console.log('Successful Login!');
-      return res.status(200).send({ message: `User: ${email} logged In Successfully.` });
+      return res.status(200).send({ message: `User: ${email} logged In Successfully.`, log: `User: ${email} logged In Successfully.` });
     } else {
-      console.error('Incorrect Password!');
-      return res.status(401).send({ message: 'Incorrect Password.' });
+      console.error('Incorrect Password or Username');
+      return res.status(401).send({ message: 'Incorrect Password or Username.', log: 'Incorrect Password or Username.'});
     }
   });
 });
 
+app.get('/employees', (req, res) => {
+    connection.query('SELECT * FROM employees', (err, results) => {
+        if (err) {
+            console.error('Error fetching employees:', err);
+            res.status(500).send('Error fetching employees');
+        } else {
+            res.send(results);
+        }
+    });
+}
+);
 
 app.listen(PORT, () => {
   console.log(`Node.js server running at http://localhost:${PORT}`);
