@@ -84,7 +84,18 @@ app.post('/login', (req, res, next) => {
   );
 }
 );
-    
+ 
+app.get('/userDetails', (req, res) => {
+  connection.query('SELECT * FROM users WHERE emailAddress = ?', (err, results) => {
+    if (err) {
+      console.error('Error fetching users:', err);
+      res.status(500).send('Error fetching users');
+    } else {
+      res.send(results);
+    }
+  }
+  );
+})
 
 app.get('/employees', (req, res) => {
     connection.query('SELECT * FROM employees', (err, results) => {
