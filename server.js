@@ -73,7 +73,9 @@ app.post('/login', (req, res, next) => {
     const loginDetails = results[0];
     if (email == loginDetails.emailAddress && password == loginDetails.password) {
       console.log('Successful Login!');
-      res.redirect('http://127.0.0.1:5500/ExpressApp/mysqllogin/dashboard.html');
+      setTimeout(() => {
+        res.redirect('http://127.0.0.1:5500/ExpressApp/mysqllogin/dashboard.html');
+      }, 5000);
     } else {
       console.error('Incorrect Password or Username');
       return res.status(401).send({ message: 'Incorrect Password or Username.', log: 'Incorrect Password or Username.'});
