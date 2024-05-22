@@ -6,4 +6,47 @@
     height: 100vh;
     width: 100vw;
 }
+
+/* Index Styles */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+.loginButton {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    font-size: 20px;
+}
 /* Dashbaord styles */
+th {
+    background-color: #ced2ff;
+    color: #000;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 10px;
+
+}
+td {
+    background-color: #d0eaf8;
+    color: #000;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 10px;
+    border: #000 1px solid;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
