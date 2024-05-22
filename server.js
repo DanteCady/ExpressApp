@@ -26,6 +26,7 @@ connection.connect(err => {
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static('./mysqllogin/dashboard.html'));
 
 app.post('/addemployee', (req, res) => {
     const { fname, lname, dept, jobTitle, hireDate, endDate, salary } = req.body;
@@ -70,16 +71,18 @@ app.post('/login', (req, res, next) => {
     }
     
     const loginDetails = results[0];
-    
     if (email == loginDetails.emailAddress && password == loginDetails.password) {
       console.log('Successful Login!');
-      return res.status(200).send({ message: `User: ${email} logged In Successfully.`, log: `User: ${email} logged In Successfully.` });
+      res.redirect('http://127.0.0.1:5500/ExpressApp/mysqllogin/dashboard.html');
     } else {
       console.error('Incorrect Password or Username');
       return res.status(401).send({ message: 'Incorrect Password or Username.', log: 'Incorrect Password or Username.'});
     }
-  });
-});
+  }
+  );
+}
+);
+    
 
 app.get('/employees', (req, res) => {
     connection.query('SELECT * FROM employees', (err, results) => {
@@ -97,3 +100,4 @@ app.listen(PORT, () => {
   console.log(`Node.js server running at http://localhost:${PORT}`);
   // console.log(`add user to database at http://localhost:${PORT}/addemployee`);
 })
+

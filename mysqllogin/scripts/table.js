@@ -13,16 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 const firstNameCell = row.insertCell(0);
                 const lastNameCell = row.insertCell(1);
                 const departmentCell = row.insertCell(2);
-                const jobTitleCell = row.insertCell(3);
-                const startDateCell = row.insertCell(4);
-                const salaryCell = row.insertCell(5);
+                const startDateCell = row.insertCell(3);
+                const salaryCell = row.insertCell(4);
 
-                firstNameCell.textContent = employee.FirstName;
-                lastNameCell.textContent = employee.LastName;
-                departmentCell.textContent = employee.Department;
-                jobTitleCell.textContent = employee.JobTitle;
-                startDateCell.textContent = new Date(employee.StartDate).toLocaleDateString(); // Formats date
-                salaryCell.textContent = `$${parseFloat(employee.Salary).toLocaleString()}`; // Formats salary as currency
+                firstNameCell.textContent = employee.firstName;
+                lastNameCell.textContent = employee.lastName;
+                departmentCell.textContent = employee.department;
+                startDateCell.textContent = new Date(employee.hireDate).toLocaleDateString(); // Formats date
+                salaryCell.textContent = employee.salary // Formats salary as currency
             });
         })
         .catch(error => console.error('Error fetching employees:', error));
